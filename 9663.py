@@ -2,50 +2,55 @@ from sys import stdin
 import copy
 
 
-def solve(depth, y, x, listK):
+
+
+def solve(depth, listN):
     global count
     global inputN
-
-    listN=copy.deepcopy(listK)
-    if inputN == depth:
+    if depth == inputN:
         count = count + 1
-        print("hellow")
         return
-    else:
-        pass
 
-    if y == inputN:
-        return
-    if depth == inputN-1 :
-        for item in listN:
-            print(item)
-        print()
     for i in range(inputN):
-        listN[y][i]=1
-        listN[i][x]=1
-    for i in range(inputN-y):
-        if y+i < inputN  and x+i < inputN:
-            listN[y+i][x+i] = 1
-        if y+i < inputN  and x-i >= 0:
-            listN[y+i][x-i] = 1
-    for i in range(y+1):
-        if y-i >= 0  and x-i >= 0:
-            listN[y-i][x-i] = 1
-        if y-i >= 0  and x+i < inputN:
-            listN[y-i][x+i] = 1
-    for i in range(y, inputN):
-        for j in range(inputN):
-            if listN[i][j]==0:
-                # print(i,j)
-                solve(depth+1, i, j, listN)
+        newlistN = copy.deepcopy(listN)
+
+        if newlistN[depth][i] != 1:
+            for k in range(inputN):
+                #세로줄 가로줄 다 1로 초기화
+                newlistN[depth][k] = 1
+                newlistN[k][i] = 1
+            j=1
+            while True:
+                flag= False
+                if (depth+j < inputN) and (i+j < inputN):
+                    newlistN[depth +j][i+j]=1
+                    flag = True
+                    #1사분면
+                if (depth+j < inputN) and (i-j >= 0):
+                    newlistN[depth +j][i-j]=1
+                    flag = True
+                    #2사분면
+                if (depth-j >= 0) and (i+j < inputN):
+                    newlistN[depth-j][i+j]=1
+                    flag = True
+                    #3사분면
+                if (depth-j >= 0) and (i-j >= 0):
+                    newlistN[depth-j][i-j]=1
+                    flag = True
+                    #4사분면
+                if flag ==False:
+                    break
+                j= j+1
+
+            solve(depth+1, newlistN)
+
+        else:
+            continue
 
 
+
+count =0
 inputN = int(input())
-count=0
-y=0
-x=0
-listK = [[0 for _ in range(inputN)] for _ in range(inputN)]
-
-print(0,0)
-solve(0, y, x, listK)
+listN = [[0 for _ in range(inputN)] for _ in range(inputN)]
+solve(0, listN)
 print(count)
