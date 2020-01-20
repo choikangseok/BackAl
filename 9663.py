@@ -1,9 +1,6 @@
 from sys import stdin
 import copy
 
-
-
-
 def solve(depth, listN):
     global count
     global inputN
@@ -43,7 +40,6 @@ def solve(depth, listN):
                 j= j+1
 
             solve(depth+1, newlistN)
-
         else:
             continue
 
