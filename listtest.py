@@ -12,4 +12,4 @@ listN=list(set(listN) - set(listNK))
 print(listN)
 
 if listN == []:
-    print("시발")
+    print("gd")
