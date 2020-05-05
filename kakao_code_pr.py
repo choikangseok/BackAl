@@ -1,5 +1,5 @@
 from sys import stdin
-
+#https://tech.kakao.com/2017/11/14/kakao-blind-recruitment-round-3/
 
 def solve(num, N):
     NN=['0', '1', '2', '3', '4', '5', '6', '7', '8', '9', 'A', 'B', 'C', 'D', 'E', 'F']
